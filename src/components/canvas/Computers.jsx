@@ -10,7 +10,7 @@ const Computers = () => {
     <mesh>
       <hemisphereLight intensity={0.15}
         groundColor="black"/>
-        <pintLight intensity={1} />
+        <pointLight intensity={1} />
         <primitive
           object={computer.scene}
         />
@@ -23,9 +23,18 @@ const ComputersCanvas = () => {
     <Canvas
       framelop="demand"
       shadows
-      camera=
+      camera={{ position: [20,3,5], fov: 25 }}
+      gL={{ preserveDrawingBuffer: true }}
     >
-
+      <Suspense fallback={<CanvasLoader />} >
+        <OrbitControls
+          enableZoom={false}
+          maxPolarAngle={Math.PI / 2}
+          minPolarAngle={Math.PI / 2}
+        />
+        <Computers />
+      </Suspense>
+      <Preload />
     </Canvas>
   )
 }
